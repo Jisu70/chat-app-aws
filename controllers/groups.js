@@ -25,6 +25,7 @@ async function getAllGroups(req, res, next) {
 		res.status(404).json({ msg: "cannot get groups", err: error });
 	}
 }
+
 async function addMembers2Group(req, res, next) {
 	try {
 		let member = await User.findOne({ where: { email: req.body.memberEmail } });

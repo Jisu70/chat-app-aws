@@ -7,8 +7,9 @@ async function fileupload(req, res, next) {
     if (error) {
       console.log(error);
       return res.status(400).json({ msg: 'multer error while parsing', err: error });
-    console.log('file successfully parsed');
-    next();
+      console.log('file successfully parsed');
+      next();
+    }
   });
 }
 

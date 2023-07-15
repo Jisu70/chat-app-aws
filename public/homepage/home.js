@@ -61,7 +61,7 @@ function parseJwt(token) {
 			})
 			.join("")
 	);
-
+	console.log(jsonPayload)
 	return JSON.parse(jsonPayload);
 }
 
@@ -212,7 +212,6 @@ async function addMembers(e) {
 	}
 }
 
-// *********************************************Chat Side
 
 async function groupChatPage(e) {
 	e.preventDefault();

@@ -1,5 +1,4 @@
 let signupForm = document.querySelector("#signupForm");
-
 signupForm.addEventListener("submit", formSubmit);
 
 function showMessageDiv(text) {
@@ -13,6 +12,8 @@ function showMessageDiv(text) {
 }
 
 async function formSubmit(e) {
+console.log("hello")
+
 	try {
 		e.preventDefault();
 		let obj = {
@@ -21,10 +22,8 @@ async function formSubmit(e) {
 			phoneNo: document.querySelector("#phoneNoInput").value,
 			password: document.querySelector("#passwordInput").value,
 		};
-
 		let response = await axios.post("http://localhost:3000/users/signup", obj);
 		if (response) {
-			showMessageDiv(response.data.msg);
 			window.location.href = '../login/login.html'
 		}
 	} catch (error) {

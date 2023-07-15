@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
+//Middlewares 
+const  authorization = require('../middlewares/auth')
+
 // Controller
 const {
   createNewGroup,

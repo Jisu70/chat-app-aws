@@ -1,26 +1,17 @@
 // Dependencies 
 const express = require("express");
-const path = require("path");
 const cors = require("cors");
 const app = express();
 const http = require("http").Server(app);
-const bodyParser = require("body-parser");
 const io = require("socket.io")(http, { cors: { origin: "*" } });
 require("dotenv").config();
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
 // Socket IO
-io.on("connection", (socket) => {
-  socket.on("message", (msg, userName, groupId) => {
-    io.emit("message", msg, userName, groupId);
-  });
-
-  socket.on("file", (msg, userName, groupId) => {
-    io.emit("file", msg, userName, groupId);
-  });
-});
-
+const socketIO = require("./sockets/socket");
+// Socket IO
+socketIO(io);
 // Routes
 const userRoute = require("./routes/users");
 const chatsRoute = require("./routes/chats");
@@ -52,11 +43,12 @@ app.use(groupRoute);
 (async () => {
   try {
     await sequelize.sync();
-
     http.listen(process.env.PORT, () => {
       console.log(`server listening on port ${process.env.PORT}`);
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error connecting to the database:", error);
+    // Handle the error appropriately (e.g., send an error response)
   }
 })();
+
